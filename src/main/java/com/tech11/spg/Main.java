@@ -16,6 +16,10 @@ public class Main {
 		String targetFolder = convertIntoAbsolutePath(args[1]);
 		Locale locale = new Locale(args[2]);
 		
+		SystemConfiguration.instance().setTemplateFolder(templateFolder);
+		SystemConfiguration.instance().setTargetFolder(targetFolder);
+		SystemConfiguration.instance().setLocale(locale);
+		
 		
 		//String folderPath = "D:\\hero\\workspace-neon\\spg\\src\\test\\resources";
 		//String outputPath = "D:\\hero\\workspace-neon\\spg\\src\\test\\resources\\de";

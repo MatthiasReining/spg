@@ -12,13 +12,11 @@ public class MessageLoader {
 
 	Properties messages = new Properties();
 
-	public static MessageLoader init(File tmplFile) throws IOException {
-		return init(tmplFile, null);
-	}
-
-	public static MessageLoader init(File tmplFolder, String defaultLanguage) throws IOException {
+	
+	public static MessageLoader init(File tmplFolder) throws IOException {
 		MessageLoader ml = new MessageLoader();
 
+		String defaultLanguage = SystemConfiguration.instance().getDefaultLang();
 		ml.msgFileName = tmplFolder.getAbsolutePath() + File.separator + "messages";
 		ml.loadDefault(defaultLanguage);
 		return ml;

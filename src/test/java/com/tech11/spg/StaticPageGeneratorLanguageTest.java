@@ -20,6 +20,7 @@ public class StaticPageGeneratorLanguageTest {
 		spg = new StaticPageGenerator()
 				.setOutputWriter(result)
 				.setTemplateFolder(templateFolder)
+				.setMessageFolder(templateFolder)
 				.processSingleTemplate("test1.html.ftl");
 	}
 

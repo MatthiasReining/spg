@@ -16,12 +16,13 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
 public class StaticPageGenerator {
-	
+
 	private static Logger LOGGER = Logger.getLogger(StaticPageGenerator.class.getName());
-	
+
 	private String singleTemplate;
 	private File templateFolder;
 	private File targetFolder;
+	private File messageFolder;
 	private Writer outputWriter;
 	private Locale locale;
 
@@ -29,7 +30,12 @@ public class StaticPageGenerator {
 		this.templateFolder = new File(folderPath);
 		return this;
 	}
-	
+
+	public StaticPageGenerator setMessageFolder(String messageFolder) {
+		this.messageFolder = new File(messageFolder);
+		return this;
+	}
+
 	public StaticPageGenerator setTargetFolder(String targetFolder) {
 		this.targetFolder = new File(targetFolder);
 		return this;
@@ -61,10 +67,11 @@ public class StaticPageGenerator {
 
 		try {
 			config.setDirectoryForTemplateLoading(templateFolder);
-
-			String defaultLang = "en";
-
-			MessageLoader ml = MessageLoader.init(templateFolder, defaultLang);
+			
+			if (messageFolder == null)
+				messageFolder = new File(SystemConfiguration.instance().getDefaultMessageFolder());
+			
+			MessageLoader ml = MessageLoader.init(messageFolder);
 			if (locale != null)
 				ml.loadLang(locale.toString());
 			Properties msg = ml.getMessages();
@@ -82,7 +89,7 @@ public class StaticPageGenerator {
 						return false;
 					}
 				});
-			
+
 			if (targetFolder == null)
 				targetFolder = templateFolder;
 			else {
@@ -90,7 +97,7 @@ public class StaticPageGenerator {
 					targetFolder.mkdirs();
 			}
 
-			for (String templateName : templates) {				
+			for (String templateName : templates) {
 				Template template = config.getTemplate(templateName);
 				if (outputWriter == null) {
 					String outputFileName = templateName.substring(0, templateName.lastIndexOf(".ftl"));
@@ -98,14 +105,13 @@ public class StaticPageGenerator {
 					Writer out = new FileWriter(outFilePath);
 
 					LOGGER.log(Level.INFO, () -> "Generate " + outFilePath);
-					
+
 					template.process(msg, out);
 				} else {
 					template.process(msg, outputWriter);
 				}
 
 			}
-		
 
 		} catch (IOException | TemplateException e) {
 			// TODO Auto-generated catch block
