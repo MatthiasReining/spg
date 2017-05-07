@@ -20,7 +20,7 @@ public class StaticPageGeneratorFMIncludeTest {
 		spg = new StaticPageGenerator()
 				.setOutputWriter(result)
 				.setTemplateFolder(templateFolder)
-				.setMessageFolder(templateFolder)
+				.setDataFolder(templateFolder)
 				.processSingleTemplate("test2.html.ftl");
 	}
 

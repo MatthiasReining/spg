@@ -6,8 +6,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
-import java.util.Properties;
+import java.util.Map;
 import java.util.TimeZone;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,14 +16,14 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
-public class StaticPageGenerator {
+public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 
-	private static Logger LOGGER = Logger.getLogger(StaticPageGenerator.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(StaticPageGenerator.class.getName());
 
 	private String singleTemplate;
 	private File templateFolder;
 	private File targetFolder;
-	private File messageFolder;
+	private File dataFolder;
 	private Writer outputWriter;
 	private Locale locale;
 
@@ -31,8 +32,8 @@ public class StaticPageGenerator {
 		return this;
 	}
 
-	public StaticPageGenerator setMessageFolder(String messageFolder) {
-		this.messageFolder = new File(messageFolder);
+	public StaticPageGenerator setDataFolder(String messageFolder) {
+		this.dataFolder = new File(messageFolder);
 		return this;
 	}
 
@@ -68,14 +69,20 @@ public class StaticPageGenerator {
 		try {
 			config.setDirectoryForTemplateLoading(templateFolder);
 			
-			if (messageFolder == null)
-				messageFolder = new File(SystemConfiguration.instance().getDefaultMessageFolder());
+			if (dataFolder == null)
+				dataFolder = new File(SystemConfiguration.instance().getDefaultMessageFolder());
 			
-			MessageLoader ml = MessageLoader.init(messageFolder);
+			MessageLoader ml = new MessageLoader(dataFolder);
 			if (locale != null)
 				ml.loadLang(locale.toString());
-			Properties msg = ml.getMessages();
+			Map<String, Object> data = ml.getData();
 
+			JsonStructLoader jsonData = new JsonStructLoader(dataFolder);
+			if (locale != null)
+				jsonData.loadLang(locale.toString());
+			data.putAll(jsonData.getData());
+			
+			
 			String[] templates;
 
 			if (singleTemplate != null)
@@ -106,9 +113,9 @@ public class StaticPageGenerator {
 
 					LOGGER.log(Level.INFO, () -> "Generate " + outFilePath);
 
-					template.process(msg, out);
+					template.process(data, out);
 				} else {
-					template.process(msg, outputWriter);
+					template.process(data, outputWriter);
 				}
 
 			}
@@ -118,5 +125,10 @@ public class StaticPageGenerator {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public Runnable get() {		
+		return this;
 	}
 }

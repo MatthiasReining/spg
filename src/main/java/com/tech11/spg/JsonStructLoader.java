@@ -5,43 +5,44 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class MessageLoader extends DataLoader<MessageLoader> {
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
-	public MessageLoader(File tmplFolder) throws IOException {
+public class JsonStructLoader extends DataLoader<JsonStructLoader> {
+
+	public JsonStructLoader(File tmplFolder) throws IOException {
 		super(tmplFolder);
 	}
 
 	@Override
 	Map<String, Object> loadData(String lang) throws IOException {
+		
+		Map<String, Object> p = new HashMap<>();
 
-		Map<String, Object> result = new HashMap<>();
 		String langAppendix = "";
 		if (lang != null)
 			langAppendix = "_" + lang;
 
-		String propFilePath = msgFileName + langAppendix + ".properties";
+		String propFilePath = msgFileName + langAppendix + ".json";
 		if (!new File(propFilePath).exists()) {
 			System.err.println("File " + propFilePath + " doesn't exists");
-			return result;
+			return p;
 		}
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(propFilePath), "UTF8"));
-		Properties p = new Properties();
-		p.load(in);
-		
-		//convert to Map<String,Object>
-		p.entrySet().forEach(entry -> result.put(entry.getKey().toString(), entry.getValue()));
-
-		return result;
+		String data = new String(Files.readAllBytes(Paths.get(propFilePath)), "UTF-8");		
+		JSONObject json = new JSONObject(data);
+		return json.toMap();
 	}
 
 	@Override
 	String getDataFileName() {
-		return "messages";
+		return "struct";
 	}
 
 }

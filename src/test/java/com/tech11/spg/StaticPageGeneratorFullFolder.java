@@ -19,7 +19,7 @@ public class StaticPageGeneratorFullFolder {
 		spg = new StaticPageGenerator()
 				.setOutputWriter(result)
 				.setTemplateFolder(templateFolder)
-				.setMessageFolder(templateFolder);
+				.setDataFolder(templateFolder);
 	}
 
 	@Test
