@@ -39,7 +39,7 @@ public class Main {
 
 		Path dir = Paths.get(templateFolder);
 
-		new WatchDir(dir, false).processEvents(spg);
+		new WatchDir(dir, true).processEvents(spg);
 
 	}
 
