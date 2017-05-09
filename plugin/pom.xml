@@ -2,9 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.tech11</groupId>
+	<parent>
+		<groupId>com.tech11</groupId>
+		<artifactId>spg-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>		
+    </parent>
+  
 	<artifactId>spg-maven-plugin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>spg-maven-plugin Maven Plugin</name>
@@ -33,14 +37,12 @@
 
 		<dependency>
 			<groupId>com.tech11</groupId>
-			<artifactId>spg</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>spg-core</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<artifactId>junit</artifactId>			
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
