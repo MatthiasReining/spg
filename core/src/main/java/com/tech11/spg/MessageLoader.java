@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class MessageLoader extends DataLoader<MessageLoader> {
+public class MessageLoader extends DataLoader {
 
 	public MessageLoader(File tmplFolder) throws IOException {
 		super(tmplFolder);

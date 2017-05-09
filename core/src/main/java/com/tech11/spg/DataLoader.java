@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class DataLoader<T> {
+public abstract class DataLoader {
 
 	protected String msgFileName;
 	Map<String, Object> data = new HashMap<>();
@@ -16,14 +16,15 @@ public abstract class DataLoader<T> {
 		loadDefault(defaultLanguage);
 	}
 
-	public T loadDefault(String lang) throws IOException {
+	public <T extends DataLoader> T loadDefault(String lang) throws IOException {
 		return loadLang(lang);
 	}
 
-	public T loadLang(String lang) throws IOException {
+	@SuppressWarnings("unchecked")
+	public <T extends DataLoader> T loadLang(String lang) throws IOException {
 		Map<String, Object> p = loadData(lang);
-		data.putAll(p);
-		return (T)this;
+		data.putAll(p);		
+		return (T) this;
 	}
 
 	abstract Map<String, Object> loadData(String lang) throws IOException;

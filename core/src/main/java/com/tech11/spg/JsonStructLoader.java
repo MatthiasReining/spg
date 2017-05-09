@@ -1,20 +1,15 @@
 package com.tech11.spg;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-public class JsonStructLoader extends DataLoader<JsonStructLoader> {
+public class JsonStructLoader extends DataLoader {
 
 	public JsonStructLoader(File tmplFolder) throws IOException {
 		super(tmplFolder);
