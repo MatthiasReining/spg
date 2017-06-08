@@ -1,10 +1,16 @@
 package com.tech11.spg;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
+import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -108,12 +114,15 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 				Template template = config.getTemplate(templateName);
 				if (outputWriter == null) {
 					String outputFileName = templateName.substring(0, templateName.lastIndexOf(".ftl"));
-					String outFilePath = targetFolder.getAbsolutePath() + File.separator + outputFileName;
-					Writer out = new FileWriter(outFilePath);
-
-					LOGGER.log(Level.INFO, () -> "Generate " + outFilePath);
-
+					String outFilePath = targetFolder.getAbsolutePath() + File.separator + outputFileName;					
+					StringWriter out = new StringWriter();					
+					
 					template.process(data, out);
+					
+					LOGGER.log(Level.INFO, () -> "Generate " + outFilePath);
+					
+					Files.write(Paths.get(outFilePath), out.toString().getBytes("UTF-8"), StandardOpenOption.CREATE);
+					 
 				} else {
 					template.process(data, outputWriter);
 				}
