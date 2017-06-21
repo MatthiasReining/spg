@@ -121,7 +121,7 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 					
 					LOGGER.log(Level.INFO, () -> "Generate " + outFilePath);
 					
-					Files.write(Paths.get(outFilePath), out.toString().getBytes("UTF-8"), StandardOpenOption.CREATE);
+					Files.write(Paths.get(outFilePath), out.toString().getBytes("UTF-8"));
 					 
 				} else {
 					template.process(data, outputWriter);
