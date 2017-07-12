@@ -1,18 +1,16 @@
 package com.tech11.spg;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.function.Supplier;
 import java.util.logging.Level;
@@ -31,8 +29,9 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 	private File targetFolder;
 	private File dataFolder;
 	private Writer outputWriter;
-	private Locale locale;
-
+	private Locale masterLanguage;
+	private Locale singleTargetLanguage;
+	
 	public StaticPageGenerator setTemplateFolder(String folderPath) {
 		this.templateFolder = new File(folderPath);
 		return this;
@@ -47,14 +46,19 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 		this.targetFolder = new File(targetFolder);
 		return this;
 	}
-
-	public StaticPageGenerator setOutputWriter(Writer outputWriter) {
-		this.outputWriter = outputWriter;
+	
+	public StaticPageGenerator setMasterLanguage(Locale masterLanguage) {
+		this.masterLanguage = masterLanguage;
+		return this;
+	}
+	
+	public StaticPageGenerator setSingleTargetLanguage(Locale singleTargetLanguage) {
+		this.singleTargetLanguage = singleTargetLanguage;
 		return this;
 	}
 
-	public StaticPageGenerator setLanguage(Locale locale) {
-		this.locale = locale;
+	public StaticPageGenerator setOutputWriter(Writer outputWriter) {
+		this.outputWriter = outputWriter;
 		return this;
 	}
 
@@ -63,11 +67,27 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 		return this;
 	}
 
+	/**
+	 * run build for all countries
+	 */
+	@Override
 	public void run() {
+		Set<Locale> locales = new HashSet<>();
+		if (singleTargetLanguage !=null)
+			locales.add(singleTargetLanguage);
+		else
+			locales = LocaleDetector.extractLocales(dataFolder);
+		
+		for(Locale locale: locales) {
+			runCountry(locale);
+		}
+	}
+	
+	public void runCountry(Locale locale) {
 		// Freemarker configuration object
 		freemarker.template.Configuration config = new freemarker.template.Configuration();
 		config.setDefaultEncoding("UTF-8");
-		config.setLocale(Locale.GERMAN);
+		config.setLocale(locale);
 		config.setOutputEncoding("UTF-8");
 		config.setTimeZone(TimeZone.getTimeZone("GMT"));
 		config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);

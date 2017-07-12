@@ -30,8 +30,7 @@ public class Main {
 
 		StaticPageGenerator spg = new StaticPageGenerator()
 				.setTemplateFolder(templateFolder)
-				.setTargetFolder(targetFolder)
-				.setLanguage(locale);
+				.setTargetFolder(targetFolder);
 		spg.run();
 
 		if (System.getProperty("spg.watch") == null)

@@ -26,19 +26,19 @@ public class StaticPageGeneratorLanguageTest {
 
 	@Test
 	public void shouldUseEnglishAsDefaultMessage() {
-		spg.run();		
+		spg.setSingleTargetLanguage(Locale.ENGLISH).run();
 		Assert.assertEquals("Hello", result.toString());
 	}
 	
 	@Test
 	public void shouldUseEnglishMessage() {
-		spg.setLanguage(Locale.ENGLISH).run();		
+		spg.setSingleTargetLanguage(Locale.ENGLISH).run();		
 		Assert.assertEquals("Hello", result.toString());
 	}
 	
 	@Test
 	public void shouldUseGermanMessage() {
-		spg.setLanguage(Locale.GERMAN).run();		
+		spg.setSingleTargetLanguage(Locale.GERMAN).run();		
 		Assert.assertEquals("Hallo", result.toString());
 	}
 }

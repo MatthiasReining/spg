@@ -1,6 +1,7 @@
 package com.tech11.spg;
 
 import java.io.StringWriter;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class StaticPageGeneratorFullFolder {
 
 	@Test
 	public void shouldProcessAllTemplatesinFolder() {
-		spg.run();
+		spg.setSingleTargetLanguage(Locale.ENGLISH).run();
 		Assert.assertEquals("Hellofirst line\r\nHellothird line", result.toString());
 	}
 	

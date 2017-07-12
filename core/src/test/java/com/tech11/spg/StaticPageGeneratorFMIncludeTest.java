@@ -29,7 +29,7 @@ public class StaticPageGeneratorFMIncludeTest {
 
 	@Test
 	public void shouldIncludeTest1() {
-		spg.setLanguage(Locale.ENGLISH).run();
+		spg.setSingleTargetLanguage(Locale.ENGLISH).run();
 		Assert.assertEquals("first line\r\nHellothird line", result.toString());
 	}
 }

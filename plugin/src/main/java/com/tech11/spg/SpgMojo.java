@@ -38,7 +38,6 @@ public class SpgMojo extends AbstractMojo {
 		new StaticPageGenerator()
 				.setTemplateFolder(templateFolder)
 				.setTargetFolder(targetFolder)
-				.setLanguage(locale)
 				.run(); 
 		
 
