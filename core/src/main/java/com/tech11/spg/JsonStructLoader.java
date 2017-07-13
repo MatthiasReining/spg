@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -16,13 +17,26 @@ public class JsonStructLoader extends DataLoader {
 	}
 
 	@Override
-	Map<String, Object> loadData(String lang) throws IOException {
+	Map<String, Object> loadData(Locale locale, Locale fallbackLocale) throws IOException {
 		
 		Map<String, Object> p = new HashMap<>();
+		
+		if (fallbackLocale != null)
+			p.putAll(loadData(fallbackLocale));
+		
+		p.putAll(loadData(locale));
+		
+		return p;
 
+	}
+	
+	Map<String, Object> loadData(Locale locale) throws IOException {
+		
+		Map<String, Object> p = new HashMap<>();
+		
 		String langAppendix = "";
-		if (lang != null)
-			langAppendix = "_" + lang;
+		if (locale != null)
+			langAppendix = "_" + locale.toString();
 
 		String propFilePath = msgFileName + langAppendix + ".json";
 		if (!new File(propFilePath).exists()) {

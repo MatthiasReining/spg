@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String... args) throws IOException {
 
 		if (args.length != 3) {
-			System.err.println("Please use SPG with java -jar spg.jar <TEMPLATE_FOLDER> <TARGET_FOLDER> <LANGUAGE>");
+			System.err.println("Please use SPG with java -jar spg.jar <TEMPLATE_FOLDER> <TARGET_FOLDER> <MASTERLANGUAGE> <SINGLETARGETLANGUAGE>");
 			System.exit(1);
 		}
 
@@ -30,7 +30,8 @@ public class Main {
 
 		StaticPageGenerator spg = new StaticPageGenerator()
 				.setTemplateFolder(templateFolder)
-				.setTargetFolder(targetFolder);
+				.setTargetFolder(targetFolder)
+				.setMasterLanguage(locale);		
 		spg.run();
 
 		if (System.getProperty("spg.watch") == null)

@@ -3,6 +3,7 @@ package com.tech11.spg;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public abstract class DataLoader {
@@ -17,17 +18,21 @@ public abstract class DataLoader {
 	}
 
 	public <T extends DataLoader> T loadDefault(String lang) throws IOException {
-		return loadLang(lang);
+		//FIXME return loadLang(lang);
+		return null;
 	}
 
+	public <T extends DataLoader> T loadLang(Locale locale) throws IOException {
+		return loadLang(locale, null);
+	}
+	
 	@SuppressWarnings("unchecked")
-	public <T extends DataLoader> T loadLang(String lang) throws IOException {
-		Map<String, Object> p = loadData(lang);
-		data.putAll(p);		
+	public <T extends DataLoader> T loadLang(Locale locale, Locale fallbackLocale) throws IOException {
+		data.putAll( loadData(locale, fallbackLocale));
 		return (T) this;
 	}
 
-	abstract Map<String, Object> loadData(String lang) throws IOException;
+	abstract Map<String, Object> loadData(Locale locale, Locale fallbackLang) throws IOException;
 	abstract String getDataFileName();
 
 	public Map<String, Object> getData() {
