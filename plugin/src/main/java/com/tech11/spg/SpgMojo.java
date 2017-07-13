@@ -23,13 +23,13 @@ public class SpgMojo extends AbstractMojo {
 	@Parameter(property = "targetFolder", required = true)
 	private String targetFolder;
 
-	@Parameter(property = "locale", required = true)
-	private String localeTxt;
+	@Parameter(property = "masterLocale", required = true)
+	private String masterLocaleTxt;
 
 	@Override
 	public void execute() throws MojoExecutionException {
 
-		Locale locale = new Locale(localeTxt);
+		Locale locale = new Locale(masterLocaleTxt);
 
 		SystemConfiguration.instance().setTemplateFolder(templateFolder);
 		SystemConfiguration.instance().setTargetFolder(targetFolder);
@@ -38,6 +38,7 @@ public class SpgMojo extends AbstractMojo {
 		new StaticPageGenerator()
 				.setTemplateFolder(templateFolder)
 				.setTargetFolder(targetFolder)
+				.setMasterLanguage(locale)
 				.run(); 
 		
 
