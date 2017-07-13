@@ -5,9 +5,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
@@ -17,6 +17,10 @@ import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.tech11.spg.dataloader.JsonStructLoader;
+import com.tech11.spg.dataloader.MessageLoader;
+
+import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
@@ -69,7 +73,7 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 	}
 
 	/**
-	 * run build for all countries
+	 * run and build output for all countries
 	 */
 	@Override
 	public void run() {
@@ -82,20 +86,17 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 		else
 			locales = LocaleDetector.extractLocales(dataFolder);
 
-		System.out.println("run for languages " + locales);
-
 		for (Locale locale : locales) {
 			runCountry(locale);
 		}
 	}
 
 	public void runCountry(Locale locale) {
-		System.out.println("create for language " + locale);
 		// Freemarker configuration object
-		freemarker.template.Configuration config = new freemarker.template.Configuration();
-		config.setDefaultEncoding("UTF-8");
+		freemarker.template.Configuration config = new freemarker.template.Configuration(Configuration.VERSION_2_3_23);
+		config.setDefaultEncoding(StandardCharsets.UTF_8.name());
 		config.setLocale(locale);
-		config.setOutputEncoding("UTF-8");
+		config.setOutputEncoding(StandardCharsets.UTF_8.name());
 		config.setTimeZone(TimeZone.getTimeZone("GMT"));
 		config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
@@ -107,8 +108,12 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 
 			Map<String, Object> data;
 
-			data = new MessageLoader(dataFolder).loadLang(locale, masterLanguage).getData();
-			data.putAll(new JsonStructLoader(dataFolder).loadLang(locale, masterLanguage).getData());
+			data = new MessageLoader(dataFolder).loadMessage(locale, masterLanguage).getData();
+			data.putAll(new JsonStructLoader(dataFolder).loadMessage(locale, masterLanguage).getData());
+
+			data.put("currentLocale", locale.toString());
+			data.put("currentLanguage", locale.getLanguage());
+			data.put("currentCountry", locale.getCountry());
 
 			String[] templates;
 
@@ -126,8 +131,8 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 
 			if (targetFolder == null)
 				targetFolder = templateFolder;
-			
-			File countryTargetFolder = new File(targetFolder, locale.toString());
+
+			File countryTargetFolder = new File(targetFolder, convertLocale2Folder(locale));
 
 			if (!countryTargetFolder.exists())
 				countryTargetFolder.mkdirs();
@@ -156,6 +161,17 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 			e.printStackTrace();
 		}
 
+	}
+
+	String convertLocale2Folder(Locale locale) {
+		String folderName = locale.getLanguage().toLowerCase();
+
+		if (locale.getCountry() == null || locale.getCountry().isEmpty())
+			return folderName;
+
+		folderName += "-" + locale.getCountry().toLowerCase();
+
+		return folderName;
 	}
 
 	@Override

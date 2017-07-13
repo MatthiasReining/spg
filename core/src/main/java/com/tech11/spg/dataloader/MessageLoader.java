@@ -1,10 +1,12 @@
-package com.tech11.spg;
+package com.tech11.spg.dataloader;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -31,17 +33,11 @@ public class MessageLoader extends DataLoader {
 	Map<String, Object> loadData(Locale locale) throws IOException {
 
 		Map<String, Object> result = new HashMap<>();
-		String langAppendix = "";
-		if (locale != null)
-			langAppendix = "_" + locale;
+		File file = getMessagesFile(locale);
+		if (file == null)
+			return new HashMap<>();
 
-		String propFilePath = msgFileName + langAppendix + ".properties";
-		if (!new File(propFilePath).exists()) {
-			System.err.println("File " + propFilePath + " doesn't exists");
-			return result;
-		}
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(propFilePath), "UTF8"));
+		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
 		Properties p = new Properties();
 		p.load(in);
 
@@ -54,6 +50,11 @@ public class MessageLoader extends DataLoader {
 	@Override
 	String getDataFileName() {
 		return "messages";
+	}
+
+	@Override
+	String getFileExtension() {
+		return ".properties";
 	}
 
 }
