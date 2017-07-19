@@ -3,7 +3,7 @@ package com.tech11.spg.dataloader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -13,7 +13,7 @@ public abstract class DataLoader {
 
 	protected File tmplFolder;
 	protected String msgFileName;
-	Map<String, Object> data = new HashMap<>();
+	Map<String, Object> data = new LinkedHashMap<>();
 
 	DataLoader(File tmplFolder) throws IOException {
 		this.tmplFolder = tmplFolder;
@@ -47,7 +47,7 @@ public abstract class DataLoader {
 		return data;
 	}
 
-	protected File getMessagesFile(Locale locale) {
+	public File getMessagesFile(Locale locale) {
 
 		String msgPath = tmplFolder.getAbsolutePath() + File.separator + getDataFileName();
 		File result;

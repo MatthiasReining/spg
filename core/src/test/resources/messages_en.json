@@ -1,0 +1,393 @@
+{
+    "suites": [
+        {
+            "name": "s.BusinessPartner",
+            "pic": "s_business-partner.jpg",
+            "link": "business-partner.html"
+        },
+        {
+            "name": "s.Claims",
+            "pic": "s_claims.jpg",
+            "link": "claims.html"
+        },
+        {
+            "name": "s.Docs",
+            "pic": "s_docs.jpg",
+            "link": "docs.html"
+        },
+        {
+            "name": "s.PolicyAdministration",
+            "pic": "s_portfolio.jpg",
+            "link": "policy-administration.html"
+        },
+        {
+            "name": "s.Rating",
+            "pic": "s_rating.jpg",
+            "link": "rating.html"
+        }
+    ],
+    "about": {
+        "title": "About",
+        "subtitle": "",
+        "abstract": "<b>tech11</b> is founded based on the love to <b>technology</b> and strong experience in <b>insurance business</b>!",
+        "management": "The <strong>Management</strong>"
+    },
+    "impressum": {
+        "liability": "<strong>Haftung:</strong><br>Für Fehler im Text und Preisangaben übernehmen wir keine Haftung. <br>Sämtliche Veröffentlichungen erfolgen ohne Berücksichtigung eines evtl. Patentschutzes, auch werden Warennamen ohne Gewährleistung einer freien Verwendung benützt.<br>"
+    },
+    "professionalServices": {
+        "development": {
+            "name": "development",
+            "description": "blub blub",
+            "skills": [
+                "Insurance architectures",
+                "Enterprise integration (legacy systems, satelite systems (accounting, data warehouse, etc.)",
+                "Customizing of policy managment systems <br><i>(based on our experience we are also able to customize / integrate the systems of our competitors ;-))</i>",
+                "Microservice architectures / Docker",
+                "Process orchestration (BPMS)",
+                "Java / Java EE combined with best open source / third party libraries",
+                "Responsive UI development with JavaScript (Angular, ESNext)"
+            ]
+        },
+        "analysis": {
+            "name": "analysis",
+            "description": "bla bla ",
+            "skills": [
+                "Business analysis",
+                "GAP analysis",
+                "System analysis, architecture review",
+                "System evalution <i>Based on our experience we can give you recommondations about the right choice for your IT systems (also independent of the <a href='products.html'>products</a> of tech11 ;-))</i>"
+            ]
+        },
+        "projectManagement": {
+            "name": "project management",
+            "description": "blub bla",
+            "skills": [
+                "Traditional project management",
+                "Agile project management",
+                "Mixed project management by agile projects and C-level with traditional milestones"
+            ]
+        }
+    },
+    "technologies": {
+        "title": "Technologies",
+        "subtitle": "our passion",
+        "abstract": "Based on <b>latest technologies</b> we are able to provide you a <b>smart, flexible insurance system</b> without wasting millions lines of code for useless proprietary frameworks and infrastructure.",
+        "details": "Our solutions are developed based on <strong>latest market standards</strong>, given a strong mix of <strong>Java</strong> and <strong>Java EE</strong> maturity and <strong>latest technologies</strong> also used by Twitter, Uber or Facebook.<br>The usage of our technology stack, combined with <strong>deep knowledge of the insurance business</strong> enables tech11 to build <strong>powerful</strong>, <strong>future-proof</strong>, <strong>maintainable</strong> and <strong>secure</strong> insurance solutions. <br><br><br>If you are more interessted in technology you should also follow our <a traget='_blank' href='https://blog.tech11.com'>blog</a>.",
+        "moreDetails": {
+            "title": "Some more details...",
+            "details1": "Our insurance suite is designed as micro-service architecture, which allows an easy integration and replacement of single components. For example you have already a document management system and you are satisfied with it – use it! We will seamless integrate into z.Insurance-Suite. <br><br>For our development we use as often as possible industrial / market standards!<br>Please find below a short extract of our used technologies:<br>",
+            "list": [
+                "Java EE 7 with JPA, JAX-RS, EJB",
+                "BPMN2.0, DMN1.1",
+                "Keycloak",
+                "maven, Jenkins, Selenium, Sonar, Nexus3",
+                "Wildfly, Docker",
+                "Angular (we are just evaluating the next JavaScript standard ECMAScript 6/ES6)",
+                "Gulp, NPM, Karma"
+            ],
+            "details2": "We continuously update our technology stack to latest technologies that give us a benefit!"
+        },
+        "machineRoom": {            
+            "detailsTitle": "What's happening in our machine room?",
+            "details": "Our micro-services provides only stateless services, which are accessible via an REST API. We use Docker containers to ship our modules that allows an easy deployment and gives you great scaling possibilities. <br><br>All our services have its own transaction save persistence stores. Based on the module this is an RDBMS like Oracle Database/Schema or a JSON store like MongoDB or Oracle 12g (with JSON support). <br><br>All services are orchestrated by a Business Process Management System (BPMS) based on BPMN2.0 standard. This is the starting point for customization. Inside the ICE (integrate-control-extend) component, you can extend or change our standard BPM processes that describes the business transactions of the system. Based on the BPM you have very smart possibilities to integrate existing systems from your IT landscape.<br><br>If you need completely new functionality that is not part of our standard solution or the standard behaviour of our system fits not to your need (sorry, but also these can happen time by time;-)), we/you will develop new services inside the ICE (integrate-control-extend) component or create completely new REST services from scratch that follows your requirements.<br>Our backend services are completely decoupled from our frontend services by an REST interface. The frontend is developed by a mobile first approach by using Angular and Bootstrap.<br><br>In sum, our technical design and architecture is inspired by Java Champions like Adam Bien or Arun Gupta.<br>"
+        }
+    },
+    "cloudServices": {
+        "title": "Insurance Cloud Services",
+        "subtitle": "Start your insurance business with tech11 cloud services.",
+        "abstract": "Use all our <a href='products.html'>products</a> direclty as <b>cloud services</b>! We are able to offer you a <b>transaction based pricing</b> starting by <b>1,39€</b> per insurance contract</b>!<br><br>Perfect to <b>scale your business</b>!",
+        "details": "The cloud services offers a full P&C insurance suite with standarized interfaces for incoming and outcoming data like data for your financial sysmtes /SAP. Optional you are able to connect and integrate also your/extern public services like customer credit ranking.<br>From a technical point of view, our offering for cloud services brings you dedicated persistance storage / schemas.<br><br><b>Your services, your data, your <u> virtual private cloud</u>!</b><br><br>With the product engine you are able to configure and adapt  your insurance products for the cloud. Furthermore, our container based architecture with the ICE module (integrate-control-extrand) allows you also your customized processes inside the cloud!"
+    },
+    "partner": {
+        "title": "Partner",
+        "subtitle": "our passion",
+        "abstract": "Based on <b>latest technology</b> we are able to provide you a <b>smart, flexible insurance system</b> without wasting millions lines of code for useless proprietary frameworks and infrastructure.",
+        "details": "Our solutions are developed based on <strong>latest market standards</strong>, given a strong mix of <strong>Java</strong> and <strong>Java EE</strong> maturity and <strong>latest technologies</strong> also used by Twitter, Uber or Facebook.<br>The usage of this technology stack, combined with <strong>deep knowledge of the insurance business</strong> enables tech11 to build <strong>powerful</strong>, <strong>future-proof</strong> and <strong>secure</strong> insurance solutions<br><br><br>If you are more interessted in technology you should also follow our <a traget='_blank' href='https://blog.tech11.com'>blog</a>."
+    },
+    "rating": {
+        "name": "rating",
+        "suiteName": "z.Rating",
+        "claim": "The most business friendly rating engine",
+        "abstract": "Define your tariff in <strong>MS Excel</strong>, <strong>import</strong> into s.Rating and <strong>done</strong>.",
+        "description": {
+            "title": "Speed up introduction of tariffs:",
+            "content1": "Based on our experience most business departments create their tariffs in Excel.<br> Next step they hand out the Excel-Tariff to their IT department that start to code or model the tariff in a complex tool. <br> After that, business department can start and compare if there are some errors inside the coded tariff and if the tariff works as the base Excel tariff.... <i>and mostly start again the loop.</i><br> Get rid of this procedure. Use <strong>z.Rating</strong>!",
+            "list": [
+                "Use your favourite tool Excel to build a tariff",
+                "Upload the tariff to z.Rating",
+                "Done"
+            ],
+            "content2": "Stay the owner of your tariff!"
+        },
+        "features": {
+            "title": "Features of <strong>z.Rating</strong>",
+            "list": [
+                "Tariff design in MS Excel (calculation core)",
+                "Comfortable test possibilities (test suites)",
+                "Fast rating: a full contract version is tarriffed in one-roundtrip by providing premiums for each contract module",
+                "By linking to <a href='policy-administration.html'>z.policy-administration</a> forecast and <i>if-then</i> szenarios can be run",
+                "Version manamagement for tariffs",
+                "Separation between tariff version and calculation core",
+                "Possibility for easy linking to legay calculation cores for designated tariff versions"
+            ]
+        }
+    },
+    "docs": {
+        "name": "docs",
+        "suiteName": "z.Docs",
+        "claim": "Managing Documents",
+        "abstract": "<strong>Create</strong>, <strong>edit</strong> and <strong>store</strong> your <strong>documents</strong> as simple as possible!",
+        "description": {
+            "title": "Easy document management:",
+            "content1": "Creating documents is often done by using complex document unit oriented systems. <strong>s.Docs</strong> use direclty MS Word as templating engine. Define an output format (e.g. docx or pdf) and give clerks the possibiltiy to edit and save documents on a web based enviornment in an comfortable way. A cloud based storage is directly supported.",
+            "list": [
+                "Define templates in MS Word",
+                "Save modifications in a comfortable way",
+                "Save documents to your SAN or at AWS S3"
+            ],
+            "content2": "Document administartion was never easier."
+        },
+        "features": {
+            "title": "Features of <strong>z.Docs</strong>",
+            "list": [
+                "<strong>Document generation:</strong>",
+                "Template definition in MS Word",
+                "Variable placeholder, formatting (date, number), hide sections, loops, includes, images, bar codes",
+                "Suppoted output formats doc, docx, pdf, html among others",
+                "<strong>Edit documents:</strong>",
+                "Modify and save directly MS Word documents from your <a href='policy-administration.html'>policy-administration</a> or <a href='claims.html'>claims</a> system directly without local download and upload",
+                "<strong>Storage:</strong>",
+                "Management of meta information",
+                "Use SAN as storage or cloud based storage like Amazon AWS S3"
+            ]
+        }
+    },
+    "claims": {
+        "name": "claims",
+        "suiteName": "z.Claims",
+        "claim": "Claim Administration",
+        "abstract": "Just adminster your <strong>claims</strong>. Fully controlled by a business process management system (<strong>BPMS</strong>)! <strong>Create</strong> claims, <strong>approve</strong> claims, <strong>manage reservers</strong> and doing <strong>payouts</strong>!",
+        "description": {
+            "title": "Simple claim administration:",
+            "content1": "With s.claims you have a tool to manage your claims in an easy way..",
+            "list": [
+                "Notification of claim - claim - subclaims - damaged object / injured person",
+                "Manage offers and payments",
+                "Approval processes managed by task lists",
+                "Management of in- and outgoing claim <a href='docs.html'>documents</a> (create / editing / archive)."
+            ],
+            "content2": "Just focus on business / not system."
+        },
+        "features": {
+            "title": "Features of <strong>z.Claims</strong>",
+            "list": [
+                "Possible claim structures and rules are linked to the corresponding insurance product that is defined by the <strong>product engine</strong>",
+                "Coverage check with possibility for upselling",
+                "Claim separation into claim, subclaim and damaged objects / injured persons.<br>One accident, one claim, many subclaims",
+                "Management of payments and reserves",
+                "Link and validate payouts by <a href='business-partner.html'>business partners</a>",
+                "Link <a href='docs.html'>docs</a> to integrate MS Word for managing correspondence.",
+                "All modifications are fully controlled by an BPMS."
+            ]
+        }
+    },
+    "policyAdministration": {
+        "name": "policy administration",
+        "suiteName": "z.PolicyAdminisration",
+        "claim": "Administrate your general policies",
+        "abstract": "A <strong>product engine</strong> driven <strong>policy management system</strong> for <strong>property and casuality</strong>. All business transactions are flexible and fully controlled by a business process management system (<strong>BPMS</strong>)!",
+        "description": {
+            "title": "Know your portfolio:",
+            "content1": "Modern policy administration for property and casuality.",
+            "list": [
+                "Product driven",
+                "High level of automisation",
+                "Highly integrative",
+                "Managed by a BPMS"
+            ],
+            "content2": "A ready to use system runnable inside a <a href='cloud-services.html'>cloud</a>."
+        },
+        "features": {
+            "title": "Features of <strong>z.PolicyAdministration</strong>",
+            "list": [
+                "Policy structure and rules are defined by the <strong>product engine</strong>",
+                "Define your products by a <strong>zero-code</strong> approach",
+                "All modifications on contracts are always done by an BPM process (business process management)",
+                "Link policy holder, payer and other parties to a random party system (like <a href='business-partner.html'>business partners</a>)",
+                "Fast issuing of a new contract on a single page - no paging!",
+                "Link documents (policies, endorsements, etc.) to your contract",
+                "Sales systems (web and mobile) are out-of-the-box available: <strong>b2c-home</strong> and <strong>b2c-quote</strong>"
+            ]
+        }
+    },
+    "businessPartner": {
+        "name": "business partner",
+        "suiteName": "z.BusinessPartner",
+        "claim": "Have a full 360° view of your customers",
+        "abstract": "<strong>Partner management</strong>, that allows you a <strong>full 360° view</strong> to your customers. See all policies, all claims all customer interactions and also <strong>cross selling potentialities</strong>.",
+        "description": {
+            "title": "Manage your business partners",
+            "content1": "With s.BusinessPartner you have strong possiblities to administer partner data.",
+            "list": [
+                "Use existing partner validation rules or configure your own rules",
+                "Link your <a href='policy-administration.html'>policies</a>, <a href='claims.html'>claims</a> and your CRM to s.BusinessPartner",
+                "Get a full overview about all interactions with your partners."
+            ],
+            "content2": ""
+        },
+        "features": {
+            "title": "Features of <strong>z.businessPartner</strong>",
+            "list": [
+                "Manage partner types based on our flexible data structure",
+                "Full history for all modifications",
+                "Define partner roles with different rules and attributes",
+                "Address validation",
+                "Bank data (IBAN) validation",
+                "Link parnters with business domains like <a href='policy-administration.html'>policies</a> or <a href='claims.html'>claims</a>"
+            ]
+        }
+    },
+    "shippableModules": {
+        "shippableModules": "Technical shippable modules for",
+        "description": "Each shippable module is a Docker image:",
+        "modules": [
+            {
+                "name": "policy administration",
+                "description": "blub blub",
+                "belongsTo": [
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "business-partner",
+                "description": "Core services to administrate business partners",
+                "belongsTo": [
+                    "businessPartner"
+                ]
+            },
+            {
+                "name": "address-manager",
+                "description": "Adress validation",
+                "belongsTo": [
+                    "businessPartner"
+                ]
+            },
+            {
+                "name": "iban-manager",
+                "description": "IBAN validation",
+                "belongsTo": [
+                    "businessPartner"
+                ]
+            },
+            {
+                "name": "claim",
+                "description": "Claim administration by offers and payout via ICE processes. Management of all payments",
+                "belongsTo": [
+                    "claims"
+                ]
+            },
+            {
+                "name": "product-machine",
+                "description": "Define structures and rules of your insurance products",
+                "belongsTo": [
+                    "claims",
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "ice",
+                "description": "ice: integrate - control - extend. The heart of ICE is a BPMS. For all activities are reference processes available which can be <i>extend</i> and modified in custom projects. Customizing is done by <i>ice</i>",
+                "belongsTo": [
+                    "claims",
+                    "businessPartner",
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "logbook",
+                "description": "The logbook manages two dimensions: the logged object and the triggered process (e2e logging)",
+                "belongsTo": [
+                    "claims",
+                    "businessPartner",
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "number-generator",
+                "description": "Generate unqiue numbers to identify objects",
+                "belongsTo": [
+                    "claims",
+                    "businessPartner",
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "clerk-ui",
+                "description": "A modern, responsive web based user interface for clerks to access the backend systems",
+                "belongsTo": [
+                    "claims",
+                    "businessPartner",
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "calc",
+                "description": "Calculation engine that use the imported Excel files as basis for premium calculation.",
+                "belongsTo": [
+                    "rating"
+                ]
+            },
+            {
+                "name": "tariff",
+                "description": "Tariff manager to manage different tariffs. Here you define the validity dates for a tariff versions. Furthermore, within the tariff manager you link the tariff versions to calculation cores from z.Rating or to legacy calculation cores.",
+                "belongsTo": [
+                    "rating"
+                ]
+            },
+            {
+                "name": "doc-gen",
+                "description": "Generate documents (pdf, doc, docx, etc) based on MS Word templates",
+                "belongsTo": [
+                    "docs"
+                ]
+            },
+            {
+                "name": "doc-edit",
+                "description": "Edit document in web based systems without download and upload.",
+                "belongsTo": [
+                    "docs"
+                ]
+            },
+            {
+                "name": "doc-storage",
+                "description": "Document storage on local SAN or at AWS S3",
+                "belongsTo": [
+                    "docs"
+                ]
+            },
+            {
+                "name": "iam",
+                "description": "Identity Access Management. Allows to manage authentication and authorization.",
+                "belongsTo": [
+                    "rating",
+                    "docs",
+                    "claims",
+                    "businessPartner",
+                    "policyAdministration"
+                ]
+            },
+            {
+                "name": "business-workbench",
+                "description": "The front end for business user to administer the system.",
+                "belongsTo": [
+                    "rating",
+                    "docs",
+                    "claims",
+                    "businessPartner",
+                    "policyAdministration"
+                ]
+            }
+        ]
+    }
+}
