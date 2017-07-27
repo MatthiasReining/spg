@@ -21,6 +21,10 @@ public abstract class DataLoader {
 		msgFileName = tmplFolder.getAbsolutePath() + File.separator + getDataFileName();
 		loadDefaultMessages(defaultLanguage);
 	}
+	
+	DataLoader() {
+		//only for unit testing
+	}
 
 	public <T extends DataLoader> T loadDefaultMessages(String lang) throws IOException {
 		// FIXME return loadLang(lang);

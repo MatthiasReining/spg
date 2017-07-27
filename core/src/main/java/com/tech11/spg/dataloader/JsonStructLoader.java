@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.JSONObject;
 
@@ -14,6 +15,10 @@ public class JsonStructLoader extends DataLoader {
 
 	public JsonStructLoader(File tmplFolder) throws IOException {
 		super(tmplFolder);
+	}
+	
+	JsonStructLoader() {
+		//only for unit testing
 	}
 
 	@Override
@@ -24,14 +29,31 @@ public class JsonStructLoader extends DataLoader {
 		if (fallbackLocale != null)
 			p.putAll(loadData(fallbackLocale));
 
-		p.putAll(loadData(locale));
+		updateData(p, loadData(locale));
 
 		return p;
+	}
 
+	void updateData(Map<String, Object> base, Map<String, Object> newMap) {
+		for (Entry<String, Object> e : newMap.entrySet()) {
+			String key = e.getKey();
+			Object value = e.getValue();
+			Object baseObj = base.get(key);
+
+			if (value instanceof Map && baseObj != null && baseObj instanceof Map) {
+
+				@SuppressWarnings("unchecked")
+				Map<String, Object> baseMap = (Map<String, Object>) baseObj;
+				@SuppressWarnings("unchecked")
+				Map<String, Object> newMapEntry = (Map<String, Object>) value;
+
+				updateData(baseMap, newMapEntry);
+			} else
+				base.put(e.getKey(), e.getValue());
+		}
 	}
 
 	Map<String, Object> loadData(Locale locale) throws IOException {
-		
 
 		File file = getMessagesFile(locale);
 		if (file == null)
