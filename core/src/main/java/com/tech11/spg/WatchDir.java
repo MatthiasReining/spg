@@ -63,6 +63,26 @@ public class WatchDir {
 	private final boolean recursive;
 	private boolean trace = true;
 
+	/**
+	 * Creates a WatchService and registers the given directory
+	 */
+	WatchDir(Path dir, boolean recursive) throws IOException {
+		this.watcher = FileSystems.getDefault().newWatchService();
+		this.keys = new HashMap<>();
+		this.recursive = recursive;
+
+		if (recursive) {
+			System.out.format("Scanning %s ...%n", dir);
+			registerAll(dir);
+			System.out.println("Done.");
+		} else {
+			register(dir);
+		}
+
+		// enable trace after initial registration
+		this.trace = true;
+	}
+
 	@SuppressWarnings("unchecked")
 	static <T> WatchEvent<T> cast(WatchEvent<?> event) {
 		return (WatchEvent<T>) event;
@@ -76,10 +96,10 @@ public class WatchDir {
 		if (trace) {
 			Path prev = keys.get(key);
 			if (prev == null) {
-				System.out.format("register: %s\n", dir);
+				System.out.format("register: %s%n", dir);
 			} else {
 				if (!dir.equals(prev)) {
-					System.out.format("update: %s -> %s\n", prev, dir);
+					System.out.format("update: %s -> %s%n", prev, dir);
 				}
 			}
 		}
@@ -94,32 +114,11 @@ public class WatchDir {
 		// register directory and sub-directories
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			@Override
-			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
-					throws IOException {
+			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
 				register(dir);
 				return FileVisitResult.CONTINUE;
 			}
 		});
-	}
-
-	/**
-	 * Creates a WatchService and registers the given directory
-	 */
-	WatchDir(Path dir, boolean recursive) throws IOException {
-		this.watcher = FileSystems.getDefault().newWatchService();
-		this.keys = new HashMap<WatchKey, Path>();
-		this.recursive = recursive;
-
-		if (recursive) {
-			System.out.format("Scanning %s ...\n", dir);
-			registerAll(dir);
-			System.out.println("Done.");
-		} else {
-			register(dir);
-		}
-
-		// enable trace after initial registration
-		this.trace = true;
 	}
 
 	/**
@@ -166,7 +165,7 @@ public class WatchDir {
 				Path child = dir.resolve(name);
 
 				// print out event
-				System.out.format("%s: %s\n", event.kind().name(), child);
+				System.out.format("%s: %s%n", event.kind().name(), child);
 
 				if (callable != null)
 					callable.get().run();
@@ -208,7 +207,7 @@ public class WatchDir {
 			usage();
 		boolean recursive = false;
 		int dirArg = 0;
-		if (args[0].equals("-r")) {
+		if ("-r".equals(args[0])) {
 			if (args.length < 2)
 				usage();
 			recursive = true;

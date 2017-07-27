@@ -17,18 +17,11 @@ public abstract class DataLoader {
 
 	DataLoader(File tmplFolder) throws IOException {
 		this.tmplFolder = tmplFolder;
-		String defaultLanguage = SystemConfiguration.instance().getDefaultLang();
 		msgFileName = tmplFolder.getAbsolutePath() + File.separator + getDataFileName();
-		loadDefaultMessages(defaultLanguage);
-	}
-	
-	DataLoader() {
-		//only for unit testing
 	}
 
-	public <T extends DataLoader> T loadDefaultMessages(String lang) throws IOException {
-		// FIXME return loadLang(lang);
-		return null;
+	DataLoader() {
+		// only for unit testing
 	}
 
 	public <T extends DataLoader> T loadMessages(Locale locale) throws IOException {
@@ -65,7 +58,7 @@ public abstract class DataLoader {
 			System.err.println("File " + msgPath + " doesn't exists");
 			return null;
 		}
-		
+
 		String tmpName = getDataFileName() + "_" + locale.getLanguage();
 		if (!locale.getCountry().isEmpty())
 			tmpName += "-" + locale.getCountry();
@@ -74,7 +67,7 @@ public abstract class DataLoader {
 		String[] msgFileNames = tmplFolder.list(new FilenameFilter() {
 
 			@Override
-			public boolean accept(File dir, String name) {				
+			public boolean accept(File dir, String name) {
 				if (name.equalsIgnoreCase(testName))
 					return true;
 				return false;

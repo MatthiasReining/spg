@@ -1,7 +1,6 @@
 package com.tech11.spg;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -119,15 +118,13 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 
 			if (singleTemplate != null)
 				templates = new String[] { singleTemplate };
-			else
-				templates = templateFolder.list(new FilenameFilter() {
-					@Override
-					public boolean accept(File dir, String name) {
-						if (name.endsWith(".ftl"))
-							return true;
-						return false;
-					}
+			else {
+				templates = templateFolder.list( (File dir, String name) -> {
+					if (name.endsWith(".ftl"))
+						return true;
+					return false;
 				});
+			}
 
 			if (targetFolder == null)
 				targetFolder = templateFolder;
