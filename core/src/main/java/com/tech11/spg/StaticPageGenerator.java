@@ -119,8 +119,8 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 			if (singleTemplate != null)
 				templates = new String[] { singleTemplate };
 			else {
-				templates = templateFolder.list( (File dir, String name) -> {
-					if (name.endsWith(".ftl"))
+				templates = templateFolder.list((File dir, String name) -> {
+					if (name.endsWith(".ftl") || name.endsWith(".html"))
 						return true;
 					return false;
 				});
@@ -137,7 +137,9 @@ public class StaticPageGenerator implements Runnable, Supplier<Runnable> {
 			for (String templateName : templates) {
 				Template template = config.getTemplate(templateName);
 				if (outputWriter == null) {
-					String outputFileName = templateName.substring(0, templateName.lastIndexOf(".ftl"));
+					String outputFileName = templateName;
+					if (templateName.endsWith(".ftl"))
+						outputFileName = templateName.substring(0, templateName.lastIndexOf(".ftl"));
 					String outFilePath = countryTargetFolder.getAbsolutePath() + File.separator + outputFileName;
 					StringWriter out = new StringWriter();
 
